@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrolling Path with Bible Quotes</title>
+  <style>
+    body {
+      margin: 0;
+      height: 300vh; /* Simulate long scrolling */
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #87ceeb);
+      overflow-x: hidden;
+    }
+
+    svg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 50vh;
+    }
+
+    text {
+      fill: #ff6347; /* Orange-red text */
+      font-size: 5rem;
+      font-weight: bold;
+      letter-spacing: 0.4rem;
+    }
+
+    path {
+      fill: none;
+      stroke: #2c3e50; /* Dark gray road */
+      stroke-width: 5;
+      stroke-dasharray: 15, 8; /* Dashed road effect */
+    }
+
+    .quote {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #2c3e50;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 300px;
+      opacity: 0; /* Hidden initially */
+      transition: opacity 0.5s;
+    }
+
+    .quote.visible {
+      opacity: 1;
+    }
+
+    #main-text {
+      position: fixed;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ff6347;
+      opacity: 0; /* Hidden initially */
+      transition: opacity 1s;
+    }
+
+    #main-text.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- The fixed SVG with a wavy path -->
+  <svg viewBox="0 0 1000 800">
+    <!-- S-shaped wavy road -->
+    <path id="road" d="M100,100 C300,300 700,300 900,100 
+                      C700,-100 300,-100 100,100 
+                      C300,300 700,300 900,500" />
+    <!-- Animated text -->
+    <text>
+      <textPath href="#road" id="textPath">J E S U S</textPath>
+    </text>
+  </svg>
+
+  <!-- Bible Quotes -->
+  <div class="quote" id="quote1" style="top: 20%; left: 20%;">"Jesus er veien, sannheten og livet." - Johannes 14:6</div>
+  <div class="quote" id="quote2" style="top: 40%; left: 70%;">"Ingen kommer til Faderen utenom meg." - Johannes 14:6</div>
+  <div class="quote" id="quote3" style="top: 60%; left: 30%;">"Jeg er verdens lys." - Johannes 8:12</div>
+  <div class="quote" id="quote4" style="top: 80%; left: 75%;">"Kom til meg, alle som strever." - Matteus 11:28</div>
+
+  <!-- Main Text at the Bottom -->
+  <div id="main-text">JESUS: Veien, Sannheten, og Livet</div>
+
+  <script>
+    const textPath = document.querySelector('#textPath');
+    const path = document.querySelector('#road');
+    const quotes = [
+      document.getElementById('quote1'),
+      document.getElementById('quote2'),
+      document.getElementById('quote3'),
+      document.getElementById('quote4')
+    ];
+    const mainText = document.getElementById('main-text');
+    const pathLength = path.getTotalLength();
+
+    // Set initial state of textPath
+    textPath.setAttribute('startOffset', '0');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY; // Current scroll position
+      const scrollHeight = document.body.scrollHeight - window.innerHeight; // Max scrollable height
+      const scrollPercentage = scrollTop / scrollHeight; // Percentage scrolled
+
+      // Move text along the path
+      const textOffset = scrollPercentage * pathLength * 1.5; // Multiplier for smooth motion
+      textPath.setAttribute('startOffset', textOffset);
+
+      // Show quotes at specific scroll ranges
+      quotes.forEach((quote, index) => {
+        const rangeStart = index * 0.2; // Quote appears at intervals
+        const rangeEnd = rangeStart + 0.2; // Each quote has a 20% range
+
+        if (scrollPercentage >= rangeStart && scrollPercentage <= rangeEnd) {
+          quote.classList.add('visible');
+        } else {
+          quote.classList.remove('visible');
+        }
+      });
+
+      // Show the main text when near the bottom
+      if (scrollPercentage > 0.8) {
+        mainText.classList.add('visible');
+      } else {
+        mainText.classList.remove('visible');
+      }
+    });
+  </script>
+
+</body>
+</html>
