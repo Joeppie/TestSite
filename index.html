@@ -37,35 +37,7 @@
   </style>
 </head>
 <body>
-
-  <!-- SVG with a swirly S-shaped path -->
-  <svg viewBox="0 0 1000 400">
-    <!-- The road -->
-    <path id="road" d="M100,300 C300,50 700,50 900,300" />
-    <!-- The moving text -->
-    <text>
-      <textPath href="#road" id="textPath">JESUS</textPath>
-    </text>
-  </svg>
-
-  <script>
-    const textPath = document.querySelector('#textPath');
-    const path = document.querySelector('#road');
-    const pathLength = path.getTotalLength();
-
-    // Update text position based on scroll
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY; // Current scroll position
-      const scrollHeight = document.body.scrollHeight - window.innerHeight; // Max scrollable height
-      const scrollPercentage = scrollTop / scrollHeight; // Percentage scrolled
-
-      // Map scroll percentage to path length
-      const textOffset = scrollPercentage * pathLength;
-
-      // Move the text along the path
-      textPath.setAttribute('startOffset', textOffset);
-    });
-  </script>
-
+    <a href="one.html">first example</a>
+    <a href="two.html">second  example</a>
 </body>
 </html>

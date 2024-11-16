@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text on Path Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      height: 300vh; /* Simulate a long page for scrolling */
+      background: linear-gradient(to bottom, #f0f8ff, #87ceeb);
+      font-family: Arial, sans-serif;
+    }
+
+    svg {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: auto;
+    }
+
+    text {
+      fill: #ff6347; /* Orange-red text color */
+      font-size: 3rem;
+      font-weight: bold;
+      letter-spacing: 0.2rem;
+    }
+
+    path {
+      fill: none;
+      stroke: #2c3e50; /* Dark gray road color */
+      stroke-width: 5;
+      stroke-dasharray: 10, 5; /* Dashed road effect */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SVG with a swirly S-shaped path -->
+  <svg viewBox="0 0 1000 400">
+    <!-- The road -->
+    <path id="road" d="M100,300 C300,50 700,50 900,300" />
+    <!-- The moving text -->
+    <text>
+      <textPath href="#road" id="textPath">JESUS</textPath>
+    </text>
+  </svg>
+
+  <script>
+    const textPath = document.querySelector('#textPath');
+    const path = document.querySelector('#road');
+    const pathLength = path.getTotalLength();
+
+    // Update text position based on scroll
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY; // Current scroll position
+      const scrollHeight = document.body.scrollHeight - window.innerHeight; // Max scrollable height
+      const scrollPercentage = scrollTop / scrollHeight; // Percentage scrolled
+
+      // Map scroll percentage to path length
+      const textOffset = scrollPercentage * pathLength;
+
+      // Move the text along the path
+      textPath.setAttribute('startOffset', textOffset);
+    });
+  </script>
+
+</body>
+</html>

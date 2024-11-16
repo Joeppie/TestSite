@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrolling Text on Path</title>
+  <style>
+    body {
+      margin: 0;
+      height: 300vh; /* Simulate long scrolling */
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #f0f8ff, #87ceeb);
+    }
+
+    svg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 50vh;
+    }
+
+    text {
+      fill: #ff6347; /* Orange-red text */
+      font-size: 5rem;
+      font-weight: bold;
+      letter-spacing: 0.4rem;
+    }
+
+    path {
+      fill: none;
+      stroke: #2c3e50; /* Dark gray road */
+      stroke-width: 5;
+      stroke-dasharray: 15, 8; /* Dashed road effect */
+    }
+
+    .logo {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff6347;
+      opacity: 0; /* Hidden initially */
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .logo.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- The fixed SVG with a wavy path -->
+  <svg viewBox="0 0 1000 800">
+    <!-- S-shaped wavy road -->
+    <path id="road" d="M100,100 C300,300 700,300 900,100 
+                      C700,-100 300,-100 100,100 
+                      C300,300 700,300 900,500" />
+    <!-- Animated text -->
+    <text>
+      <textPath href="#road" id="textPath">J E S U S</textPath>
+    </text>
+  </svg>
+
+  <!-- The small logo that appears at the top -->
+  <div class="logo" id="logo">JESUS</div>
+
+  <script>
+    const textPath = document.querySelector('#textPath');
+    const path = document.querySelector('#road');
+    const logo = document.getElementById('logo');
+    const pathLength = path.getTotalLength();
+
+    // Set initial state of textPath
+    textPath.setAttribute('startOffset', '0');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY; // Current scroll position
+      const scrollHeight = document.body.scrollHeight - window.innerHeight; // Max scrollable height
+      const scrollPercentage = scrollTop / scrollHeight; // Percentage scrolled
+
+      // Move text along the path
+      const textOffset = scrollPercentage * pathLength * 1.5; // Multiplier for smooth motion
+      textPath.setAttribute('startOffset', textOffset);
+
+      // Show the logo when scrolled halfway
+      if (scrollPercentage > 0.5) {
+        logo.classList.add('visible');
+      } else {
+        logo.classList.remove('visible');
+      }
+
+      // Scale down the SVG when near the bottom
+      if (scrollPercentage > 0.7) {
+        document.querySelector('svg').style.transform = `translateX(-50%) scale(0.5)`;
+      } else {
+        document.querySelector('svg').style.transform = `translateX(-50%) scale(1)`;
+      }
+    });
+  </script>
+
+</body>
+</html>
