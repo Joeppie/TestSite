@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,8 @@
   <style>
     body {
       margin: 0;
-      height: 300vh; /* Simulate long scrolling */
+      height: 300vh;
+      /* Simulate long scrolling */
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #f0f8ff, #87ceeb);
       overflow-x: hidden;
@@ -23,7 +25,8 @@
     }
 
     text {
-      fill: #ff6347; /* Orange-red text */
+      fill: #ff6347;
+      /* Orange-red text */
       font-size: 5rem;
       font-weight: bold;
       letter-spacing: 0.4rem;
@@ -31,9 +34,11 @@
 
     path {
       fill: none;
-      stroke: #2c3e50; /* Dark gray road */
+      stroke: #2c3e50;
+      /* Dark gray road */
       stroke-width: 5;
-      stroke-dasharray: 15, 8; /* Dashed road effect */
+      stroke-dasharray: 15, 8;
+      /* Dashed road effect */
     }
 
     .quote {
@@ -44,7 +49,8 @@
       padding: 10px;
       border-radius: 5px;
       max-width: 300px;
-      opacity: 0; /* Hidden initially */
+      opacity: 0;
+      /* Hidden initially */
       transition: opacity 0.5s;
     }
 
@@ -60,7 +66,8 @@
       font-size: 3rem;
       font-weight: bold;
       color: #ff6347;
-      opacity: 0; /* Hidden initially */
+      opacity: 0;
+      /* Hidden initially */
       transition: opacity 1s;
     }
 
@@ -69,6 +76,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- The fixed SVG with a wavy path -->
@@ -84,13 +92,50 @@
   </svg>
 
   <!-- Bible Quotes -->
-  <div class="quote" id="quote1" style="top: 20%; left: 20%;">"Jesus er veien, sannheten og livet." - Johannes 14:6</div>
-  <div class="quote" id="quote2" style="top: 40%; left: 70%;">"Ingen kommer til Faderen utenom meg." - Johannes 14:6</div>
+  <div class="quote" id="quote1" style="top: 20%; left: 20%;">"Jesus er veien, sannheten og livet." - Johannes 14:6
+  </div>
+  <div class="quote" id="quote2" style="top: 40%; left: 70%;">"Ingen kommer til Faderen utenom meg." - Johannes 14:6
+  </div>
   <div class="quote" id="quote3" style="top: 60%; left: 30%;">"Jeg er verdens lys." - Johannes 8:12</div>
   <div class="quote" id="quote4" style="top: 80%; left: 75%;">"Kom til meg, alle som strever." - Matteus 11:28</div>
 
   <!-- Main Text at the Bottom -->
-  <div id="main-text">JESUS: Veien, Sannheten, og Livet</div>
+  <div id="main-text">
+    <h1>JESUS: Veien, Sannheten, og Livet</h1>
+    <div>
+      <p>
+        1 I begynnelsen var Ordet, og Ordet var hos Gud, og Ordet var Gud.
+      </p>
+      <p>
+        2 Han var i begynnelsen hos Gud.
+      </p>
+      <p>
+        3 Alt er blitt til ved ham, og uten ham er ikke noget blitt til av alt som er blitt til.
+      </p>
+      <p>
+        4 I ham var liv, og livet var menneskenes lys.
+      </p>
+      <p>
+        5 Og lyset skinner i mørket, og mørket tok ikke imot det.
+      </p>
+      <p>
+        6 Det fremstod en mann, utsendt fra Gud; hans navn var Johannes;
+      </p>
+      <p>7 han kom til vidnesbyrd, for å vidne om lyset, forat alle skulde komme til troen ved ham.
+      </p>
+      <p>
+        8 Han var ikke lyset, men han skulde vidne om lyset.
+      </p>
+      <p>
+        9 Det sanne lys, som oplyser hvert menneske, var i ferd med å komme til verden.
+      <p>
+        10 Han var i verden, og verden er blitt til ved ham, og verden kjente ham ikke.
+      </p>
+      <p>
+        11 Han kom til sitt eget, og hans egne tok ikke imot ham.
+      </p>
+    </div>
+  </div>
 
   <script>
     const textPath = document.querySelector('#textPath');
@@ -128,6 +173,13 @@
         }
       });
 
+      // Scale down the SVG when near the bottom
+      if (scrollPercentage > 0.7) {
+        document.querySelector('svg').style.transform = `translateX(-50%) scale(0.5)`;
+      } else {
+        document.querySelector('svg').style.transform = `translateX(-50%) scale(1)`;
+      }
+
       // Show the main text when near the bottom
       if (scrollPercentage > 0.8) {
         mainText.classList.add('visible');
@@ -138,4 +190,5 @@
   </script>
 
 </body>
+
 </html>
