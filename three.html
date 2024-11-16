@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scrolling Path with Bible Quotes</title>
+  <title>Scrolling Path with Bible Quotes and fries</title>
   <style>
     body {
       margin: 0;
@@ -92,12 +92,10 @@
   </svg>
 
   <!-- Bible Quotes -->
-  <div class="quote" id="quote1" style="top: 20%; left: 20%;">"Jesus er veien, sannheten og livet." - Johannes 14:6
-  </div>
-  <div class="quote" id="quote2" style="top: 40%; left: 70%;">"Ingen kommer til Faderen utenom meg." - Johannes 14:6
-  </div>
-  <div class="quote" id="quote3" style="top: 60%; left: 30%;">"Jeg er verdens lys." - Johannes 8:12</div>
-  <div class="quote" id="quote4" style="top: 80%; left: 75%;">"Kom til meg, alle som strever." - Matteus 11:28</div>
+  <div class="quote" id="quote1" style="top: 20%; left: 20%;">"Jesus er veien, sannheten og livet." - Johannes 14:6</div>
+  <div class="quote" id="quote2" style="top: 70%; left: 70%;">"Ingen kommer til Faderen utenom meg." - Johannes 14:6</div>
+  <div class="quote" id="quote3" style="top: 120%; left: 30%;">"Jeg er verdens lys." - Johannes 8:12</div>
+  <div class="quote" id="quote4" style="top: 150%; left: 75%;">"Kom til meg, alle som strever." - Matteus 11:28</div>
 
   <!-- Main Text at the Bottom -->
   <div id="main-text">
@@ -163,8 +161,8 @@
 
       // Show quotes at specific scroll ranges
       quotes.forEach((quote, index) => {
-        const rangeStart = index * 0.2; // Quote appears at intervals
-        const rangeEnd = rangeStart + 0.2; // Each quote has a 20% range
+        const rangeStart = index * 0.15; // Quote appears at intervals
+        const rangeEnd = rangeStart + 0.3; // Each quote has a 20% range
 
         if (scrollPercentage >= rangeStart && scrollPercentage <= rangeEnd) {
           quote.classList.add('visible');
